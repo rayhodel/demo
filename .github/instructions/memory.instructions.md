@@ -64,4 +64,4 @@ If the user asks you to remember something or add something to your memory, you 
 
 ## Task Management
 
-Follow the format outlines in the `tasks/task-instructions.md` file for creating and managing tasks effectively.
+Follow the format outlines in the `tasks/task-instructions.md` file for creating and managing tasks.

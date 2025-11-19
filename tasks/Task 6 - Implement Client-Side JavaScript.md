@@ -2,109 +2,109 @@
 
 Create all client-side JavaScript functionality for handling search, API calls, credential management, and dynamic results display.
 
-## Status: Pending
+## Status: Completed
 
 ## Dependencies: Task 4 - Create API Controller and Backend Logic, Task 5 - Create Main UI View and Layout
 
 ## Steps to Complete:
 
-1. Create Settings Management Script
-   1.1. Create `wwwroot/js/settings-modal.js`
-   1.2. Add function `openSettingsModal()` to show modal and load current credentials
-   1.3. Add function `closeSettingsModal()` to hide modal
-   1.4. Add function `saveCredentials()` to save Application ID and Password to localStorage
-   1.5. Add function `getCredentials()` to retrieve credentials from localStorage
-   1.6. Add function `hasCredentials()` to check if credentials exist
-   1.7. Add event listener for settings button click
-   1.8. Add event listener for Save button in modal
-   1.9. Add event listener for Cancel button in modal
-   1.10. Add validation for required fields before saving
+[x] 1. Create Settings Management Script
+   [x] 1.Create `wwwroot/js/settings-modal.js`
+   [x] 1.Add function `openSettingsModal()` to show modal and load current credentials
+   [x] 1.Add function `closeSettingsModal()` to hide modal
+   [x] 1.Add function `saveCredentials()` to save Application ID and Password to localStorage
+   [x] 1.Add function `getCredentials()` to retrieve credentials from localStorage
+   [x] 1.Add function `hasCredentials()` to check if credentials exist
+   [x] 1.Add event listener for settings button click
+   [x] 1.Add event listener for Save button in modal
+   [x] 1.Add event listener for Cancel button in modal
+   [x] 1.Add validation for required fields before saving
 
-2. Create Main Lookup Script
-   2.1. Create `wwwroot/js/mcommunity-lookup.js`
-   2.2. Add initialization function that runs on DOM ready
-   2.3. Add event listener for form submit (prevent default)
-   2.4. Add event listener for search button click
-   2.5. Add event listener for Enter key in search input
-   2.6. Check for credentials on page load, show warning if missing
+[x] 2. Create Main Lookup Script
+   [x] 2.Create `wwwroot/js/mcommunity-lookup.js`
+   [x] 2.Add initialization function that runs on DOM ready
+   [x] 2.Add event listener for form submit (prevent default)
+   [x] 2.Add event listener for search button click
+   [x] 2.Add event listener for Enter key in search input
+   [x] 2.Check for credentials on page load, show warning if missing
 
-3. Implement Input Validation Function
-   3.1. Add function `validateSearchInput(searchTerm)`
-   3.2. Check for empty/whitespace input
-   3.3. Validate uniqname pattern: `/^[a-zA-Z0-9]{3,8}$/`
-   3.4. Validate group pattern: `/^[a-zA-Z0-9_-]{9,62}$/`
-   3.5. Return validation result with error message if invalid
-   3.6. Add function `showValidationError(message)` to display validation errors
-   3.7. Add function `clearValidationError()` to hide validation messages
+[x] 3. Implement Input Validation Function
+   [x] 3.Add function `validateSearchInput(searchTerm)`
+   [x] 3.Check for empty/whitespace input
+   [x] 3.Validate uniqname pattern: `/^[a-zA-Z0-9]{3,8}$/`
+   [x] 3.Validate group pattern: `/^[a-zA-Z0-9_-]{9,62}$/`
+   [x] 3.Return validation result with error message if invalid
+   [x] 3.Add function `showValidationError(message)` to display validation errors
+   [x] 3.Add function `clearValidationError()` to hide validation messages
 
-4. Implement Credential Check Function
-   4.1. Add function `checkCredentialsConfigured()`
-   4.2. Call `getCredentials()` from settings module
-   4.3. If credentials missing, show error message with link to settings
-   4.4. Return boolean indicating if credentials are available
-   4.5. Disable search if credentials not configured
+[x] 4. Implement Credential Check Function
+   [x] 4.Add function `checkCredentialsConfigured()`
+   [x] 4.Call `getCredentials()` from settings module
+   [x] 4.If credentials missing, show error message with link to settings
+   [x] 4.Return boolean indicating if credentials are available
+   [x] 4.Disable search if credentials not configured
 
-5. Implement Main Lookup Function
-   5.1. Add async function `performLookup(searchTerm)`
-   5.2. Validate input using `validateSearchInput()`
-   5.3. Check credentials using `checkCredentialsConfigured()`
-   5.4. Show loading indicator
-   5.5. Hide previous results and errors
-   5.6. Get credentials from localStorage
-   5.7. Build request object: `{ searchTerm, applicationId, password }`
-   5.8. Make POST request to `/api/lookup` with fetch API
-   5.9. Set headers: `Content-Type: application/json`
-   5.10. Handle response (await json parsing)
-   5.11. Hide loading indicator
-   5.12. Call appropriate display function based on response
+[x] 5. Implement Main Lookup Function
+   [x] 5.Add async function `performLookup(searchTerm)`
+   [x] 5.Validate input using `validateSearchInput()`
+   [x] 5.Check credentials using `checkCredentialsConfigured()`
+   [x] 5.Show loading indicator
+   [x] 5.Hide previous results and errors
+   [x] 5.Get credentials from localStorage
+   [x] 5.Build request object: `{ searchTerm, applicationId, password }`
+   [x] 5.Make POST request to `/api/lookup` with fetch API
+   [x] 5.Set headers: `Content-Type: application/json`
+   [x] 5.Handle response (await json parsing)
+   [x] 5.Hide loading indicator
+   [x] 5.Call appropriate display function based on response
 
-6. Implement Person Results Display Function
-   6.1. Add function `displayPersonResults(personData)`
-   6.2. Hide group results section
-   6.3. Show person results section
-   6.4. Populate display name (handle null)
-   6.5. Populate uniqname
-   6.6. Populate email addresses - iterate over array, handle multiple/null
-   6.7. Populate phone numbers - iterate over array, handle multiple/null
-   6.8. Populate titles - iterate over array, handle multiple/null
-   6.9. Populate departments/organizational units - iterate over array, handle null
-   6.10. Populate affiliations as badges - iterate over array, handle null
-   6.11. Populate distinguished name
-   6.12. Handle missing/null properties gracefully (show "Not available")
-   6.13. Scroll to results section
+[x] 6. Implement Person Results Display Function
+   [x] 6.Add function `displayPersonResults(personData)`
+   [x] 6.Hide group results section
+   [x] 6.Show person results section
+   [x] 6.Populate display name (handle null)
+   [x] 6.Populate uniqname
+   [x] 6.Populate email addresses - iterate over array, handle multiple/null
+   [x] 6.Populate phone numbers - iterate over array, handle multiple/null
+   [x] 6.Populate titles - iterate over array, handle multiple/null
+   [x] 6.Populate departments/organizational units - iterate over array, handle null
+   [x] 6.Populate affiliations as badges - iterate over array, handle null
+   [x] 6.Populate distinguished name
+   [x] 6.Handle missing/null properties gracefully (show "Not available")
+   [x] 6.Scroll to results section
 
-7. Implement Group Results Display Function
-   7.1. Add function `displayGroupResults(groupData)`
-   7.2. Hide person results section
-   7.3. Show group results section
-   7.4. Populate group name (first cn value)
-   7.5. Populate group email (append @umich.edu)
-   7.6. Populate description (handle null)
-   7.7. Populate owners count and create expandable list
-   7.8. Populate members count and create expandable list (limit initial display to 10)
-   7.9. Add "Show all" button for large member lists (>10)
-   7.10. Populate timestamps (format dates nicely)
-   7.11. Populate distinguished name
-   7.12. Handle missing/null properties gracefully
-   7.13. Scroll to results section
+[x] 7. Implement Group Results Display Function
+   [x] 7.Add function `displayGroupResults(groupData)`
+   [x] 7.Hide person results section
+   [x] 7.Show group results section
+   [x] 7.Populate group name (first cn value)
+   [x] 7.Populate group email (append @umich.edu)
+   [x] 7.Populate description (handle null)
+   [x] 7.Populate owners count and create expandable list
+   [x] 7.Populate members count and create expandable list (limit initial display to 10)
+   [x] 7.Add "Show all" button for large member lists (>10)
+   [x] 7.Populate timestamps (format dates nicely)
+   [x] 7.Populate distinguished name
+   [x] 7.Handle missing/null properties gracefully
+   [x] 7.Scroll to results section
 
-8. Implement Error Display Function
-   8.1. Add function `displayError(errorMessage, errorCode)`
-   8.2. Hide results sections
-   8.3. Show error container
-   8.4. Set error message text
-   8.5. Add appropriate styling based on error type
-   8.6. Handle specific error codes: NOT_FOUND, UNAUTHORIZED, FORBIDDEN, NETWORK_ERROR
-   8.7. Add close button handler to dismiss error
-   8.8. For UNAUTHORIZED, add link to open settings modal
+[x] 8. Implement Error Display Function
+   [x] 8.Add function `displayError(errorMessage, errorCode)`
+   [x] 8.Hide results sections
+   [x] 8.Show error container
+   [x] 8.Set error message text
+   [x] 8.Add appropriate styling based on error type
+   [x] 8.Handle specific error codes: NOT_FOUND, UNAUTHORIZED, FORBIDDEN, NETWORK_ERROR
+   [x] 8.Add close button handler to dismiss error
+   [x] 8.For UNAUTHORIZED, add link to open settings modal
 
-9. Implement Loading Indicator Functions
-   9.1. Add function `showLoading()` to display loading spinner
-   9.2. Add function `hideLoading()` to hide loading spinner
-   9.3. Add function to disable search input and button during loading
-   9.4. Add function to re-enable search input and button after loading
+[x] 9. Implement Loading Indicator Functions
+   [x] 9.Add function `showLoading()` to display loading spinner
+   [x] 9.Add function `hideLoading()` to hide loading spinner
+   [x] 9.Add function to disable search input and button during loading
+   [x] 9.Add function to re-enable search input and button after loading
 
-10. Implement Helper Functions
+[x] 10. Implement Helper Functions
     10.1. Add function `clearResults()` to hide all result sections
     10.2. Add function `scrollToResults()` to smooth scroll to results area
     10.3. Add function `formatDate(dateString)` to format ISO dates nicely
@@ -112,7 +112,7 @@ Create all client-side JavaScript functionality for handling search, API calls, 
     10.5. Add function `createBadge(value)` to create Bootstrap badge elements
     10.6. Add function `escapeHtml(text)` to prevent XSS in displayed text
 
-11. Add Error Handling for Fetch Calls
+[x] 11. Add Error Handling for Fetch Calls
     11.1. Add try-catch around fetch call
     11.2. Handle network errors (fetch rejection)
     11.3. Handle timeout errors
@@ -121,7 +121,7 @@ Create all client-side JavaScript functionality for handling search, API calls, 
     11.6. Display appropriate user-friendly error messages
     11.7. Log errors to console for debugging
 
-12. Test JavaScript Functionality
+[x] 12. Test JavaScript Functionality
     12.1. Run application with `dotnet run`
     12.2. Test opening settings modal
     12.3. Test saving credentials to localStorage (check browser dev tools)
@@ -132,7 +132,7 @@ Create all client-side JavaScript functionality for handling search, API calls, 
     12.8. Verify console shows no JavaScript errors
     12.9. Stop application
 
-13. Add Script References to Layout
+[x] 13. Add Script References to Layout
     13.1. Open `Views/Shared/_Layout.cshtml`
     13.2. Add script tag for `settings-modal.js` at bottom (before closing body)
     13.3. Add script tag for `mcommunity-lookup.js` after settings-modal.js
@@ -140,4 +140,27 @@ Create all client-side JavaScript functionality for handling search, API calls, 
     13.5. Verify script order is correct
 
 ## Completion Notes:
+
+Task 6 completed on November 19, 2025. Client-side JavaScript fully implemented:
+- settings-modal.js created with openSettingsModal, closeSettingsModal, saveCredentials, getCredentials, hasCredentials, clearCredentials functions
+- Credentials saved/retrieved from localStorage with key 'mcommunity_api_credentials'
+- Event listeners for settings button, save button, cancel button, form submit
+- Validation for required fields before saving credentials
+- Success message shown after saving settings
+- MCommunitySettings exported as global object for use by other scripts
+- mcommunity-lookup.js created with initialization function on DOM ready
+- Event listeners for form submit, search button click, Enter key, alert close buttons
+- validateSearchInput function with regex patterns: /^[a-zA-Z0-9]{3,8}$/ for uniqname, /^[a-zA-Z0-9_-]{9,62}$/ for group
+- checkCredentialsConfigured function shows error if credentials missing
+- performLookup async function makes POST to /api/lookup with fetch API, handles response/errors
+- displayPersonResults populates all person fields: displayName, uid, emails (array), phones (array), titles (array), departments (array), affiliations (badges), DN
+- displayGroupResults populates all group fields: name, email, description, owners (expandable list), members (expandable with "Show all" for >10), timestamps, DN
+- displayError function shows error container with message and error code, adds link to settings for UNAUTHORIZED/MISSING_CREDENTIALS
+- showLoading/hideLoading functions control spinner and disable inputs during API calls
+- Helper functions: clearResults, scrollToResults, formatDate, createListItem, createBadge, escapeHtml (prevents XSS)
+- extractUniqnameFromDn function extracts uid from DN strings
+- Error handling for fetch network errors, timeouts, JSON parse errors with user-friendly messages
+- showDebug function for troubleshooting JSON parse errors
+- Script references added to _Layout.cshtml: settings-modal.js and mcommunity-lookup.js after jQuery/Bootstrap
+- No JavaScript console errors on page load
 

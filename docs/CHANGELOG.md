@@ -5,13 +5,142 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-11-19
+
+### MCommunity Lookup Web Application - Release
+
+**Status:** ✅ PRODUCTION READY - All tasks completed and tested successfully
+
+#### Implementation Complete
+
+**Core Application (Tasks 1-6):**
+
+- **Task 1: Project Structure Initialized**
+  - .NET 8.0 MVC Web Application created in MCommunityWeb directory
+  - Complete folder structure with Models/ApiModels, Models/ViewModels, Services, Services/Interfaces
+  - appsettings.json configured with MCommunityApi settings (BaseUrl, TokenExpirationMinutes, RequestTimeoutSeconds)
+  - Program.cs configured with HttpClient factory, dependency injection, and middleware pipeline
+  - .gitignore configured with .NET patterns
+
+- **Task 2: API Models and Data Structures**
+  - Authentication models: TokenRequest, TokenResponse, RefreshTokenRequest, RefreshTokenResponse
+  - PersonData model with all MCommunity person fields (corrected field names from Swagger)
+  - GroupData model with all MCommunity group fields
+  - LookupRequestViewModel with validation attributes
+  - LookupResponse wrapper model with factory methods
+  - MCommunityApiOptions configuration model
+  - MCommunityHelpers with DN construction and extraction methods
+  - All models include XML documentation comments
+
+- **Task 3: MCommunityApiClient Service**
+  - IMCommunityApiClient interface with GetPersonAsync and GetGroupAsync signatures
+  - MCommunityApiClient service with HttpClient, ILogger, IOptions dependencies
+  - Token caching with thread-safe lock mechanism
+  - GetAccessTokenAsync authentication with 401 error handling
+  - EnsureValidTokenAsync token management with 5-minute expiration buffer
+  - CreateAuthenticatedRequestAsync with Bearer token authorization
+  - GetPersonAsync and GetGroupAsync with 404, 401, 403 error handling
+  - Comprehensive logging (never logs passwords or full tokens)
+  - Service registered in Program.cs with IHttpClientFactory
+
+- **Task 4: API Controller and Backend Logic**
+  - ApiController with [ApiController] and [Route("api")] attributes
+  - POST /api/lookup endpoint accepting LookupRequestViewModel
+  - ModelState validation for input
+  - MCommunityHelpers.DetermineSearchType for auto-detection (person vs group)
+  - LookupPersonAsync method with comprehensive error handling
+  - LookupGroupAsync method with comprehensive error handling
+  - Error codes: INVALID_INPUT, MISSING_CREDENTIALS, INVALID_FORMAT, UNAUTHORIZED, FORBIDDEN, NETWORK_ERROR, TIMEOUT, INTERNAL_ERROR
+  - Request/response logging without sensitive data
+  - HomeController with Index action
+
+- **Task 5: Main UI View and Layout**
+  - _Layout.cshtml with "MCommunity Lookup" branding and settings button
+  - Index.cshtml with search form, validation messages, loading indicator
+  - Person results template with all fields (name, emails, phones, titles, departments, affiliations as badges, DN)
+  - Group results template with all fields (name, email, description, owners, members with expandable lists, timestamps, DN)
+  - Settings modal for API credentials (Application ID and Password)
+  - Error and debug display containers
+  - Icons throughout UI (🔍 search, 👤 person, 📧 email, 📞 phone, 💼 title, 🏢 department, 🎓 affiliations, 👥 group, ⚙️ settings, ⚠️ error)
+  - Custom CSS in site.css with responsive breakpoints
+  - ARIA labels for accessibility
+
+- **Task 6: Client-Side JavaScript**
+  - settings-modal.js with credential management (localStorage)
+  - openSettingsModal, saveCredentials, getCredentials, hasCredentials, clearCredentials functions
+  - MCommunitySettings global object exported for cross-module use
+  - mcommunity-lookup.js with form handling and API calls
+  - validateSearchInput with regex patterns for uniqname and group
+  - performLookup async function with fetch API POST to /api/lookup
+  - displayPersonResults populating all person fields from API response
+  - displayGroupResults populating all group fields with expandable member lists
+  - displayError with context-specific messages and settings link for credential errors
+  - showLoading/hideLoading with input disable/enable
+  - Helper functions: escapeHtml (XSS prevention), formatDate, extractUniqnameFromDn
+  - showDebug for troubleshooting JSON parse errors
+  - Comprehensive error handling for network, timeout, and JSON errors
+  - Scripts referenced in _Layout.cshtml after jQuery/Bootstrap
+
+**Documentation Created:**
+- MCommunityWeb/README.md with complete setup, usage, and troubleshooting guide
+- Security considerations documented
+- Project structure diagram
+- Configuration examples
+- Support contact information
+
+#### Task 7: Testing and Documentation - ✅ COMPLETED
+
+**All Testing Complete:**
+- ✅ End-to-end functional testing performed successfully
+- ✅ Application starts without errors on http://localhost:5275
+- ✅ Settings modal and credential management working
+- ✅ Person lookup tested and working - displays all fields correctly
+- ✅ Group lookup tested and working - displays all fields correctly
+- ✅ Auto-detection logic verified (person vs group)
+- ✅ Loading indicators and UI elements functioning properly
+- ✅ Results display correctly with proper formatting
+
+**Documentation Complete:**
+- ✅ README.md with complete setup and usage instructions
+- ✅ XML comments throughout codebase
+- ✅ Security considerations documented
+- ✅ Project structure complete
+
+**Application Features:**
+- Single-page web interface for MCommunity lookups
+- Auto-detection of person (3-8 chars) vs group (9-62 chars)
+- Settings modal for API credential configuration
+- Browser localStorage credential persistence
+- Person lookup: name, emails, phones, titles, departments, affiliations
+- Group lookup: name, email, description, owners, members, timestamps
+- Responsive Bootstrap 5 UI
+- Comprehensive error handling
+- Loading indicators and smooth UX
+
+**Known Limitations:**
+- Client-side credential storage in localStorage (documented with security warning)
+- Read-only operations (no group management)
+- Requires MCommunity API credentials from ITS Service Center
+
+**Deployment Ready:**
+The application is fully functional and ready for production deployment.
+
+---
+
 ## [Unreleased]
 
-### MCommunity Lookup Web Application - Planning Phase
+Future enhancements under consideration:
+- Server-side credential storage with user authentication
+- Search history functionality
+- Bulk lookup operations
+- Advanced search capabilities
+- Group management features
+- Result caching
+- Enhanced accessibility (WCAG 2.1 AA)
 
-#### Added - November 19, 2025
+---
 
-- **Project Documentation**
+
   - Created comprehensive `DOCUMENTATION-MCOMMUNITY-LOOKUP.md` with full technical architecture
   - Project overview including business requirements and user stories
   - Detailed technology stack specification (.NET 8.0, ASP.NET Core MVC, Bootstrap 5)
