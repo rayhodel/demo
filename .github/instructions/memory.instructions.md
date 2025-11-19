@@ -36,9 +36,6 @@ These instructions guide GitHub Copilot to generate proper documentation.  It al
 
 - Always use Powershell commands and formatting for terminal commands.
 
-## Task List
-- The task list is located in a file called `tasks\tasks-MVR Requirements Specification.md`. Make sure to keep it updated when tasks are complete and reference it for the next task.
-
 ## Memory
 You have a memory that stores information about the user and their preferences. This memory is used to provide a more personalized experience. You can access and update this memory as needed. The memory is stored in a file called `.github/instructions/memory.instructions.md`. If the file is empty, you'll need to create it.
 

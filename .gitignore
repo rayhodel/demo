@@ -7,6 +7,20 @@ dist/
 build/
 out/
 *.log
+bin/
+obj/
+publish/
+
+# .NET specific
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.DotSettings.user
+
+# Entity Framework
+Migrations/
 
 # IDE
 .vscode/
@@ -23,7 +37,20 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
 
 # Temporary files
 *.tmp
 *.temp
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
