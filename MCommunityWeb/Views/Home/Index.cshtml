@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "MCommunity Lookup";
+}
+
+<div class="mcommunity-lookup-container">
+    <div class="text-center mb-4">
+        <h1 class="display-5">MCommunity Lookup</h1>
+        <p class="text-muted">Search for University of Michigan people and groups</p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8 col-lg-6">
+            <form id="lookupForm" class="mb-3">
+                <div class="input-group input-group-lg">
+                    <input type="text" 
+                           id="searchInput" 
+                           class="form-control" 
+                           placeholder="Enter uniqname or group name..." 
+                           autocomplete="off"
+                           aria-label="Search term">
+                    <button class="btn btn-primary" type="submit" id="searchButton">
+                        <span aria-hidden="true">🔍</span>
+                        Search
+                    </button>
+                </div>
+                <div id="validationMessage" class="alert alert-danger mt-2" style="display: none;" role="alert">
+                    <span id="validationText"></span>
+                    <button type="button" class="btn-close float-end" aria-label="Close"></button>
+                </div>
+            </form>
+            
+            <div class="text-muted small">
+                <strong>Uniqname:</strong> 3-8 alphanumeric characters &nbsp;|&nbsp; 
+                <strong>Group:</strong> 9-62 characters (alphanumeric, dash, underscore)
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="text-center my-4" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Searching...</p>
+    </div>
+
+    <!-- Error Container -->
+    <div id="errorContainer" class="alert alert-danger" style="display: none;" role="alert">
+        <strong>⚠️ Error:</strong>
+        <span id="errorMessage"></span>
+        <button type="button" class="btn-close float-end" aria-label="Close"></button>
+    </div>
+
+    <!-- Debug Container -->
+    <div id="debugContainer" class="alert alert-info" style="display: none;" role="alert">
+        <strong>🐛 Debug Info:</strong>
+        <button type="button" class="btn-close float-end" aria-label="Close"></button>
+        <pre id="debugContent" class="mt-2 mb-0" style="max-height: 300px; overflow-y: auto; font-size: 0.85rem;"></pre>
+    </div>
+
+    <!-- Results Container -->
+    <div id="resultsContainer" class="mt-4">
+        <!-- Initial state message -->
+        <div id="initialMessage" class="text-center text-muted py-5">
+            <p>Enter a uniqname or group name above to search.</p>
+            <p class="small">
+                <strong>⚙️ Note:</strong> Configure your API credentials in Settings before searching.
+            </p>
+        </div>
+
+        <!-- Person Results -->
+        <div id="personResults" class="card shadow-sm" style="display: none;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">👤 Person Information</h5>
+            </div>
+            <div class="card-body">
+                <h4 id="personDisplayName" class="card-title mb-3"></h4>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong>📧 Uniqname:</strong>
+                            <span id="personUid"></span>
+                        </div>
+                        
+                        <div class="mb-3" id="personEmailSection">
+                            <strong>📧 Email:</strong>
+                            <ul id="personEmails" class="list-unstyled mb-0"></ul>
+                        </div>
+                        
+                        <div class="mb-3" id="personPhoneSection">
+                            <strong>📞 Phone:</strong>
+                            <ul id="personPhones" class="list-unstyled mb-0"></ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="mb-3" id="personTitleSection">
+                            <strong>💼 Title:</strong>
+                            <ul id="personTitles" class="list-unstyled mb-0"></ul>
+                        </div>
+                        
+                        <div class="mb-3" id="personDepartmentSection">
+                            <strong>🏢 Department:</strong>
+                            <ul id="personDepartments" class="list-unstyled mb-0"></ul>
+                        </div>
+                        
+                        <div class="mb-3" id="personAffiliationSection">
+                            <strong>🎓 Affiliations:</strong>
+                            <div id="personAffiliations"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-3 pt-3 border-top">
+                    <small class="text-muted">
+                        <strong>DN:</strong> <span id="personDn"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group Results -->
+        <div id="groupResults" class="card shadow-sm" style="display: none;">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">👥 Group Information</h5>
+            </div>
+            <div class="card-body">
+                <h4 id="groupName" class="card-title mb-3"></h4>
+                
+                <div class="mb-3">
+                    <strong>📧 Email:</strong>
+                    <span id="groupEmail"></span>
+                </div>
+                
+                <div class="mb-3" id="groupDescriptionSection">
+                    <strong>📝 Description:</strong>
+                    <p id="groupDescription" class="mb-0"></p>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>👤 Owners (<span id="ownerCount">0</span>):</strong>
+                    <div id="groupOwners" class="ms-3"></div>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>👥 Members (<span id="memberCount">0</span>):</strong>
+                    <div id="groupMembers" class="ms-3"></div>
+                </div>
+                
+                <div class="mt-3 pt-3 border-top">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Created:</strong> <span id="groupCreated"></span>
+                            </small>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Modified:</strong> <span id="groupModified"></span>
+                            </small>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-2">
+                        <strong>DN:</strong> <span id="groupDn"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="settingsModalLabel">⚙️ MCommunity API Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="settingsForm">
+                    <div class="mb-3">
+                        <label for="applicationIdInput" class="form-label">Application ID</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="applicationIdInput" 
+                               placeholder="cn=mcapi-dept-usage,ou=apiusers,o=services"
+                               aria-describedby="appIdHelp">
+                        <div id="appIdHelp" class="form-text">
+                            Your MCommunity API Application ID (Distinguished Name format)
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Password</label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="passwordInput" 
+                               placeholder="Enter password"
+                               aria-describedby="passwordHelp">
+                        <div id="passwordHelp" class="form-text">
+                            Your Application ID password
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning" role="alert">
+                        <strong>⚠️ Security Note:</strong>
+                        Credentials are stored in your browser's localStorage and sent to the server with each request. 
+                        Keep them secure and don't use on shared computers.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveSettingsButton">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

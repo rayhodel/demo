@@ -13,7 +13,7 @@ The MCommunity API is a RESTful web service that allows IT professionals to:
 - Look up information about people in the MCommunity Directory
 - Create and edit MCommunity groups
 
-**Base URL**: `https://mcommunity.umich.edu/api`
+**Base URL**: `https://mcommunity.umich.edu/api/`
 
 **Documentation**: https://documentation.its.umich.edu/node/3955
 

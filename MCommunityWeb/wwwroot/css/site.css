@@ -1,0 +1,152 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* MCommunity Lookup Styles */
+.mcommunity-lookup-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#searchInput {
+    font-size: 1.1rem;
+}
+
+#searchButton {
+    min-width: 120px;
+}
+
+#validationMessage {
+    margin-bottom: 0;
+}
+
+#errorContainer {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Results Card Styling */
+#personResults .card-header,
+#groupResults .card-header {
+    font-weight: 600;
+}
+
+#personResults,
+#groupResults {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Person/Group Data Display */
+#personDisplayName,
+#groupName {
+    color: #333;
+    font-weight: 600;
+}
+
+#personEmails li,
+#personPhones li,
+#personTitles li,
+#personDepartments li {
+    padding: 2px 0;
+}
+
+#personAffiliations .badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* Group Members/Owners */
+#groupOwners,
+#groupMembers {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.member-item,
+.owner-item {
+    padding: 4px 0;
+    font-size: 0.95rem;
+}
+
+.show-more-btn {
+    margin-top: 10px;
+}
+
+/* Loading Indicator */
+#loadingIndicator {
+    min-height: 100px;
+}
+
+/* Settings Button */
+#settingsButton {
+    margin-left: 10px;
+}
+
+/* Modal Improvements */
+.modal-body .alert {
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mcommunity-lookup-container {
+        padding: 10px;
+    }
+    
+    #searchButton {
+        min-width: 100px;
+    }
+    
+    #personResults .row,
+    #groupResults .row {
+        margin-top: 10px;
+    }
+}
+
+/* Empty state */
+#initialMessage {
+    font-size: 1.1rem;
+}
+
+/* Utility classes */
+.text-break-all {
+    word-break: break-all;
+}
+
+.scrollable-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
